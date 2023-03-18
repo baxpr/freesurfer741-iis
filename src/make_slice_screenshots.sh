@@ -70,7 +70,7 @@ for i in ?_mont_???.png; do
     convert \
         -size 1224x1584 xc:white \
         -gravity Center \( ${i} -resize 1194x1454 -geometry +0+0 \) -composite \
-        -gravity SouthEast -pointsize 24 -annotate +20+20 "$the_date" \
+        -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
         -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
         -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
         ${i}
@@ -92,7 +92,7 @@ convert \
     -size 1224x1584 xc:white \
     -gravity North \( first_page.png -resize 1194x1194 -geometry +0+100 \) -composite \
     -gravity NorthEast -pointsize 24 -annotate +20+50 "QA Summary - recon-all" \
-    -gravity SouthEast -pointsize 24 -annotate +20+20 "$the_date" \
+    -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
     -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
     -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
     first_page.png
@@ -102,7 +102,7 @@ convert \
     first_page.png \
     x_mont_???.png y_mont_???.png z_mont_???.png \
     -page letter \
-    freesurfer_detailed.pdf
+    Freesurfer-QA-detailed.pdf
 
 mkdir "${out_dir}"/PDF_DETAIL
-cp freesurfer_detailed.pdf "${out_dir}"/PDF_DETAIL
+cp Freesurfer-QA-detailed.pdf "${out_dir}"/PDF_DETAIL

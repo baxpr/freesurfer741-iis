@@ -9,6 +9,13 @@ RUN wget -P /opt https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.5.2-centos7_64.
     rm /opt/fsl-6.0.5.2-centos7_64.tar.gz
 ENV PATH=/usr/local/fsl/bin:${PATH}
 
+# Install python3 and add needed modules. Note that making python3 
+# the system default breaks yum, so we won't do that. Rather, spec
+# python3 in the first line of python scripts
+RUN yum -y install python3 && \
+    yum clean all && \
+    pip3 install pandas numpy nibabel
+
 # Add code to produce QA report and reformat stats
 COPY src /opt/fsqa
 ENV PATH /opt/fsqa:${PATH}
