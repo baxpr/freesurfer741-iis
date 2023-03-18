@@ -41,7 +41,7 @@ convert \
   "${tmp_dir}"/page2.png \
   "${tmp_dir}"/page3.png \
   "${tmp_dir}"/page4.png \
-  "${out_dir}"/PDF/freesurfer.pdf
+  "${out_dir}"/PDF/Freesurfer-QA.pdf
 
 # Detailed PDF
 make_slice_screenshots.sh
