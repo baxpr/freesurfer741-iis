@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Slices with surface - series of coronal, series of axial.
 #
@@ -46,12 +46,12 @@ done
 
 # Layout
 montage -mode concatenate \
-axi_080.png axi_100.png axi_120.png \
-axi_140.png axi_160.png axi_180.png \
-cor_050.png cor_075.png cor_100.png \
-cor_125.png cor_150.png cor_175.png \
--tile 3x4 -quality 100 -background white -gravity center \
--trim -border 10 -bordercolor white -resize 600x twelve.png
+    axi_080.png axi_100.png axi_120.png \
+    axi_140.png axi_160.png axi_180.png \
+    cor_050.png cor_075.png cor_100.png \
+    cor_125.png cor_150.png cor_175.png \
+    -tile 3x4 -quality 100 -background white -gravity center \
+    -trim -border 10 -bordercolor white -resize 600x twelve.png
 
 
 
@@ -59,12 +59,12 @@ cor_125.png cor_150.png cor_175.png \
 # 8.5 x 11 at 144dpi is 1224 x 1584
 # inside 15px border is 1194 x 1554
 convert \
--size 1224x1584 xc:white \
--gravity center \( twelve.png -resize 1194x1454 \) -geometry +0+0 -composite \
--gravity NorthEast -pointsize 24 -annotate +20+50 "recon-all" \
--gravity SouthEast -pointsize 24 -annotate +20+20 "$the_date" \
--gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
--gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
-page2.png
+    -size 1224x1584 xc:white \
+    -gravity center \( twelve.png -resize 1194x1454 \) -geometry +0+0 -composite \
+    -gravity NorthEast -pointsize 24 -annotate +20+50 "recon-all" \
+    -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
+    -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
+    -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
+    page2.png
 
 

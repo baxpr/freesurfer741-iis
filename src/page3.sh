@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # Page 3, thalamus
 #
@@ -8,6 +8,9 @@
 # Also take a look at LGN-centered axial cut.
 #
 # Include a plain T1 next to e.g. the axial thalamus for comparison.
+
+# FIXME Get centers of mass etc without FSL. Probably python nibabel using 
+# nibabel.freesurfer.mghformat and gzip.open to read MGZ directly
 
 # Get LGN location: left is 8109, right is 8209
 # /usr/local/freesurfer/FreeSurferColorLUT.txt
