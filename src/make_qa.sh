@@ -29,7 +29,7 @@ export nii_dir="${out_dir}"/NIFTI
 
 # Source and working dirs
 export src_dir=$(realpath $(dirname $(which ${0})))
-export tmp_dir="${subj_dir}"/tmp
+export tmp_dir="${subj_dir}"/tmp && mkdir -p "${tmp_dir}"
 export mri_dir="${subj_dir}"/mri
 export surf_dir="${subj_dir}"/surf
 

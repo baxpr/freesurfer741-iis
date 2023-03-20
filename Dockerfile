@@ -9,6 +9,10 @@ RUN wget -P /opt https://fsl.fmrib.ox.ac.uk/fsldownloads/fsl-6.0.5.2-centos7_64.
     rm /opt/fsl-6.0.5.2-centos7_64.tar.gz
 ENV PATH=/usr/local/fsl/bin:${PATH}
 
+# Couple of dependencies for FSL
+RUN yum -y install epel-release && \
+    yum -y install openblas-devel
+
 # Install python3 and add needed modules. Note that making python3 
 # the system default breaks yum, so we won't do that. Rather, spec
 # python3 in the first line of python scripts

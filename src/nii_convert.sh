@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo NIFTI conversion
+
 for f in \
         nu \
         aseg \

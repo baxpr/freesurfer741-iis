@@ -4,6 +4,8 @@
 # Parcellation on white matter surface
 # "Scaled CNR" on white matter surface
 
+echo PDF first page
+
 # Get Freesurfer screenshots
 cd "${subj_dir}"
 freeview -cmd "${src_dir}"/page1_cmd.txt

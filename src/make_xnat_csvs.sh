@@ -2,6 +2,8 @@
 
 # Get csvs with truncated filenames to save space when using XNAT -> REDCap
 
+echo XNAT CSVs
+
 # STATS (human readable)
 for f in \
   BA_exvivo-area.csv \

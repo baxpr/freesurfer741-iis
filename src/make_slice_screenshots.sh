@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo Slice screenshots
+
 cd "${tmp_dir}"
 
 # Create the aseg without wm or cerebral gm

@@ -11,6 +11,7 @@
 #
 # Resample with mri_vol2vol
 
+echo MM label maps
 
 ##############################################################################
 # MMAP anterior/posterior
@@ -80,7 +81,7 @@ mri_binarize \
 --o "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.mgz
 
 mri_vol2vol --nearest --regheader \
-    --mov "${out_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.mgz \
+    --mov "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.mgz \
     --targ "${mri_dir}"/${hemi}.hippoAmygLabels-T1.v21.FSvoxelSpace.mgz \
     --o "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.FSVoxelSpace.mgz
 

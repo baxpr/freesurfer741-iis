@@ -2,6 +2,8 @@
 #
 # Compute and reformat regional volume/area/thickness measures
 
+echo Volume computations
+
 # Subcortical regions, aseg
 # This provides our eTIV
 asegstats2table --delimiter comma -m volume \
