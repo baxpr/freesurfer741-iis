@@ -4,8 +4,7 @@
 # directory after recon-all
 
 # Defaults for input options
-export SUBJECTS_DIR=/INPUTS
-export subj=SUBJECT
+export subj_indir=/INPUTS/SUBJECT
 export out_dir=/OUTPUTS
 export label_info=
 
@@ -14,24 +13,25 @@ export label_info=
 while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in      
-        --SUBJECTS_DIR)   export SUBJECTS_DIR="$2";   shift; shift ;;
-        --subj)           export subj="$2";           shift; shift ;;
+        --subj_indir)     export subj="$2";           shift; shift ;;
         --out_dir)        export out_dir="$2";        shift; shift ;;
         --label_info)     export label_info="$2";     shift; shift ;;
         *) echo "Input ${1} not recognized"; shift ;;
     esac
 done
 
+# Output dirs
+export SUBJECTS_DIR=/OUTPUTS
+export subj_dir="${SUBJECTS_DIR}"/SUBJECT
+cp -R "${subj_indir}" "${subj_dir}"
+mkdir "${out_dir}"/{PDF,PDF_DETAIL,NIFTI,STATS,STATS_ABBREV}
+export nii_dir="${out_dir}"/NIFTI
+
 # Source and working dirs
 export src_dir=$(realpath $(dirname $(which ${0})))
-export subj_dir="${SUBJECTS_DIR}/${subj}"
 export tmp_dir="${subj_dir}"/tmp
 export mri_dir="${subj_dir}"/mri
 export surf_dir="${subj_dir}"/surf
-
-# Output dirs
-mkdir "${out_dir}"/{PDF,PDF_DETAIL,NIFTI,STATS,STATS_ABBREV}
-export nii_dir="${out_dir}"/NIFTI
 
 # Make additional MM ROI sets
 create_MM_labelmaps.sh
