@@ -8,7 +8,7 @@
 cd "${subj_dir}"
 freeview -cmd "${src_dir}"/page1_cmd.txt
 mv *.png "${tmp_dir}"
-cd "${tmp_dir}"}
+cd "${tmp_dir}"
 
 # Trim, change background to white, resize
 for p in \

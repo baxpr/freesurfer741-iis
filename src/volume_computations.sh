@@ -25,7 +25,7 @@ done
 
 # MM computations
 echo "MM volume computations"
-volume_computations.py "${SUBJECTS_DIR}/SUBJECT/stats" "${tmp_dir}"
+volume_computations.py "${subj_dir}"/stats "${tmp_dir}"
 
 
 # Reformat CSVs

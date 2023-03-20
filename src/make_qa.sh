@@ -22,16 +22,31 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Various source and working dirs
+# Source and working dirs
 export src_dir=$(realpath $(dirname $(which ${0})))
 export subj_dir="${SUBJECTS_DIR}/${subj}"
 export tmp_dir="${subj_dir}"/tmp
 export mri_dir="${subj_dir}"/mri
 export surf_dir="${subj_dir}"/surf
 
+# Output dirs
+mkdir "${out_dir}"/{PDF,PDF_DETAIL,NIFTI,STATS,STATS_ABBREV}
+export nii_dir="${out_dir}"/NIFTI
+
+# Convert some images to Nifti
+nii_convert.sh
+
+# Volume computations
+volume_computations.sh
+
+# Make additional MM ROI sets
+create_MM_labelmaps.sh
+
+# Make CSV outputs
+make_xnat_csvs.sh
+
 # Make screenshots and PDFs
 export the_date=$(date)
-mkdir "${out_dir}"/PDF
 page1.sh
 page2.sh
 page3.sh
@@ -45,3 +60,7 @@ convert \
 
 # Detailed PDF
 make_slice_screenshots.sh
+
+# Clean up
+rm -fr "${subj_dir}"/tmp
+rm -fr "${subj_dir}"/trash

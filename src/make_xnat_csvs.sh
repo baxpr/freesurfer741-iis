@@ -3,8 +3,6 @@
 # Get csvs with truncated filenames to save space when using XNAT -> REDCap
 
 # STATS (human readable)
-stats="${out_dir}"/STATS
-mkdir "${stats}"
 for f in \
   BA_exvivo-area.csv \
   BA_exvivo-thickness.csv \
@@ -29,14 +27,13 @@ for f in \
   hipposubfields.T1.v21.stats.csv \
   thalamic-nuclei.v12.T1.stats.csv \
   ; do
-    cp "${tmp_dir}"/"${f}" "${stats}"
+    cp "${tmp_dir}"/"${f}" "${out_dir}"/STATS
 done
 
 
 # STATS_ABBREV
 # Short filenames for REDCap module
 st="${out_dir}"/STATS_ABBREV
-mkdir "${st}"
 cp "${tmp_dir}"/BA_exvivo-area.csv "${st}"/area_ba.csv
 cp "${tmp_dir}"/BA_exvivo-thickness.csv "${st}"/thick_ba.csv
 cp "${tmp_dir}"/BA_exvivo-volume.csv "${st}"/vol_ba.csv

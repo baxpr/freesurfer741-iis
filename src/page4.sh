@@ -9,8 +9,8 @@
 # https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems
 #    17   L hippocampus
 #    53   R hippocampus
-RASL=$(fslstats "${tmp_dir}"/aseg.nii.gz -l 16.5 -u 17.5 -c)
-RASR=$(fslstats "${tmp_dir}"/aseg.nii.gz -l 52.5 -u 53.5 -c)
+RASL=$(fslstats "${nii_dir}"/aseg.nii.gz -l 16.5 -u 17.5 -c)
+RASR=$(fslstats "${nii_dir}"/aseg.nii.gz -l 52.5 -u 53.5 -c)
 
 # View selected slices on T1, with surfaces
 freeview \
@@ -35,7 +35,7 @@ freeview \
 # Get RAS mm coords of region centroid
 # https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems
 #    16   brainstem
-RAS=$(fslstats "${tmp_dir}"/aseg.nii.gz -l 15.5 -u 16.5 -c)
+RAS=$(fslstats "${nii_dir}"/aseg.nii.gz -l 15.5 -u 16.5 -c)
 
 # View selected slices on T1, with surfaces
 freeview \

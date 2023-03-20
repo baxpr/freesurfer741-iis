@@ -9,25 +9,17 @@
 #
 # Include a plain T1 next to e.g. the axial thalamus for comparison.
 
-# Get nifti versions of FS outputs for fslstats to read
-for f in \
-        "${mri_dir}"/aseg.mgz \
-        "${mri_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.mgz \
-        ; do
-    mri_convert "${f}" "${tmp_dir}"/$(basename "${f}" .mgz).nii.gz
-done
-
 # Get LGN location: left is 8109, right is 8209
 # /usr/local/freesurfer/FreeSurferColorLUT.txt
 RASL=$(fslstats \
-    "${tmp_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.nii.gz \
+    "${nii_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.nii.gz \
     -l 8108.5 -u 8109.5 -c)
 RL=`echo "${RASL}" | awk '{printf "%d",$1}'`
 AL=`echo "${RASL}" | awk '{printf "%d",$2}'`
 SL=`echo "${RASL}" | awk '{printf "%d",$3}'`
 
 RASR=$(fslstats \
-    "${tmp_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.nii.gz \
+    "${nii_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.nii.gz \
     -l 8208.5 -u 8209.5 -c)
 RR=$(echo "${RASR}" | awk '{printf "%d",$1}')
 AR=$(echo "${RASR}" | awk '{printf "%d",$2}')
@@ -41,12 +33,12 @@ LGNS=$(echo "(${SL} + ${SR}) / 2" | bc)
 # https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems
 #    10   L thalamus
 #    49   R thalamus
-RASL=$(fslstats "${tmp_dir}"/aseg.nii.gz -l 9.5 -u 10.5 -c)
+RASL=$(fslstats "${nii_dir}"/aseg.nii.gz -l 9.5 -u 10.5 -c)
 RL=$(echo "${RASL}" | awk '{printf "%d",$1}')
 AL=$(echo "${RASL}" | awk '{printf "%d",$2}')
 SL=$(echo "${RASL}" | awk '{printf "%d",$3}')
 
-RASR=$(fslstats "${tmp_dir}"/aseg.nii.gz -l 48.5 -u 49.5 -c)
+RASR=$(fslstats "${nii_dir}"/aseg.nii.gz -l 48.5 -u 49.5 -c)
 RR=$(echo "${RASR}" | awk '{printf "%d",$1}')
 AR=$(echo "${RASR}" | awk '{printf "%d",$2}')
 SR=$(echo "${RASR}" | awk '{printf "%d",$3}')

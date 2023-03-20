@@ -10,9 +10,8 @@ mri_binarize --i "${mri_dir}"/aseg.mgz --o aseg.sub.mgz \
 freeview -cmd "${src_dir}"/freeview_batch_3d.txt
 
 # Get brain mask extents
-mri_convert "${mri_dir}"/brainmask.mgz brainmask.nii.gz
-extents=$(compute_extents.py brainmask.nii.gz)
-extents=(${extents// / })
+extents=( $(compute_extents.py "${nii_dir}"/brainmask.nii.gz) )
+#extents=(${extents// / })
 xmin=$((${extents[0]} + 4))
 xmax=$((${extents[1]} - 4))
 ymin=$((${extents[2]} + 4))
@@ -21,8 +20,8 @@ zmin=$((${extents[4]} + 4))
 zmax=$((${extents[5]} - 4))
 
 # And center of mass
-com=$(fslstats brainmask.nii.gz -c)
-com=(${com// / })
+com=( $(fslstats "${nii_dir}"/brainmask.nii.gz -c) )
+#com=(${com// / })
 comx=$(printf "%.0f" ${com[0]})
 comy=$(printf "%.0f" ${com[1]})
 comz=$(printf "%.0f" ${com[2]})
@@ -104,5 +103,4 @@ convert \
     -page letter \
     Freesurfer-QA-detailed.pdf
 
-mkdir "${out_dir}"/PDF_DETAIL
 cp Freesurfer-QA-detailed.pdf "${out_dir}"/PDF_DETAIL
