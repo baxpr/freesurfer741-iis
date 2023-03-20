@@ -2,7 +2,7 @@
 
 for f in \
         nu \
-        aseq \
+        aseg \
         wmparc \
         brainmask \
         ThalamicNuclei.v12.T1.FSvoxelSpace \
