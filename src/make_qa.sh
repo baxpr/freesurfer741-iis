@@ -33,14 +33,14 @@ export surf_dir="${subj_dir}"/surf
 mkdir "${out_dir}"/{PDF,PDF_DETAIL,NIFTI,STATS,STATS_ABBREV}
 export nii_dir="${out_dir}"/NIFTI
 
+# Make additional MM ROI sets
+create_MM_labelmaps.sh
+
 # Convert some images to Nifti
 nii_convert.sh
 
 # Volume computations
 volume_computations.sh
-
-# Make additional MM ROI sets
-create_MM_labelmaps.sh
 
 # Make CSV outputs
 make_xnat_csvs.sh
