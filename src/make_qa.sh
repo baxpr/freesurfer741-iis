@@ -13,7 +13,7 @@ export label_info=
 while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in      
-        --subj_indir)     export subj="$2";           shift; shift ;;
+        --subj_indir)     export subj_indir="$2";     shift; shift ;;
         --out_dir)        export out_dir="$2";        shift; shift ;;
         --label_info)     export label_info="$2";     shift; shift ;;
         *) echo "Input ${1} not recognized"; shift ;;
