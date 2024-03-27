@@ -7,6 +7,8 @@ import os
 import pandas
 import string
 
+print(f'Running {__file__}')
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--aseg_csv', required=True)
 parser.add_argument('--out_dir', required=True)
@@ -113,7 +115,7 @@ vals = list()
 for roi in rois:
     mask = [x==roi for x in aseg.columns]
     if sum(mask)==0:
-        print(f'WARNING - no volume found for ROI {roi}')
+        print(f'  WARNING - no volume found for ROI {roi}')
         vals.append(0)
     elif sum(mask)>1:
         raise Exception(f'Found >1 value for {roi}')

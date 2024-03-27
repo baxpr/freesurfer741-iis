@@ -7,6 +7,8 @@ import os
 import pandas
 import string
 
+print(f'Running {__file__}')
+
 pandas.set_option('display.max_rows', None)
 
 parser = argparse.ArgumentParser()
@@ -521,7 +523,7 @@ vals = list()
 for roi in rois:
     mask = [x==roi for x in aparc.columns]
     if sum(mask)==0:
-        print(f'WARNING - no volume found for ROI {roi}')
+        print(f'  WARNING - no volume found for ROI {roi}')
         vals.append(0)
     elif sum(mask)>1:
         raise Exception(f'Found >1 value for {roi}')

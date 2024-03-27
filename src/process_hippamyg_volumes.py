@@ -7,6 +7,8 @@ import os
 import pandas
 import string
 
+print(f'Running {__file__}')
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--subject_dir')
 parser.add_argument('--out_dir')
@@ -123,7 +125,7 @@ for roi in rois:
     elif sum(mask)==1:
         vals.append(hippamyg[1].loc[hippamyg[0]==roi].array[0])
     else:
-        print(f'WARNING - no volume found for ROI {roi}')
+        print(f'  WARNING - no volume found for ROI {roi}')
         vals.append(0)
 
 # Make data frame and write to file

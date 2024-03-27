@@ -3,8 +3,8 @@
 # MM reorg of hippocampus regions
 #
 # We have to get these from the hires resampled images:
-#     lh.hippoAmygLabels-T1.v21.mgz
-#     rh.hippoAmygLabels-T1.v21.mgz
+#     lh.hippoAmygLabels.mgz
+#     rh.hippoAmygLabels.mgz
 # Both hemispheres are labeled with the same codes.
 #
 # Label info is in $FREESURFER_HOME/FreeSurferColorLUT.txt
@@ -12,6 +12,10 @@
 # Resample with mri_vol2vol
 
 echo MM label maps
+
+mri_dir="${SUBJECTS_DIR}"/SUBJECT/mri
+mm_dir="${out_dir}"/MMmaps
+mkdir -p "${mm_dir}"
 
 ##############################################################################
 # MMAP anterior/posterior
@@ -44,7 +48,7 @@ echo MM label maps
 for hemi in lh rh ; do
 	
 mri_binarize \
---i "${mri_dir}/${hemi}.hippoAmygLabels-T1.v21.mgz" \
+--i "${mri_dir}/${hemi}.hippoAmygLabels.mgz" \
 \
 --replace 233 1 \
 --replace 235 1 \
@@ -78,18 +82,18 @@ mri_binarize \
 --replace 7010 0 \
 --replace 7015 0 \
 \
---o "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.mgz
+--o "${mm_dir}"/${hemi}.hippoLabels.MMAP.mgz
 
 mri_vol2vol --nearest --regheader \
-    --mov "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.mgz \
-    --targ "${mri_dir}"/${hemi}.hippoAmygLabels-T1.v21.FSvoxelSpace.mgz \
-    --o "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMAP.FSVoxelSpace.mgz
+    --mov "${mm_dir}"/${hemi}.hippoLabels.MMAP.mgz \
+    --targ "${mri_dir}"/${hemi}.hippoAmygLabels.FSvoxelSpace.mgz \
+    --o "${mm_dir}"/${hemi}.hippoLabels.MMAP.FSVoxelSpace.mgz
 
 done
 
 
 # Make corresponding label file
-cat <<EOF > "${mri_dir}/hippoLabels-T1.v21.MMAP.csv"
+cat <<EOF > "${mm_dir}/hippoLabels.MMAP.csv"
 Label,Region
 1,Anterior-Hippocampus
 2,Posterior-Hippocampus
@@ -137,7 +141,7 @@ EOF
 for hemi in lh rh ; do
 
 mri_binarize \
---i "${mri_dir}/${hemi}.hippoAmygLabels-T1.v21.mgz" \
+--i "${mri_dir}/${hemi}.hippoAmygLabels.mgz" \
 \
 --replace 235 1 \
 --replace 237 1 \
@@ -176,17 +180,17 @@ mri_binarize \
 --replace 7010 0 \
 --replace 7015 0 \
 \
---o "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMHBT.mgz
+--o "${mm_dir}"/${hemi}.hippoLabels.MMHBT.mgz
 
 mri_vol2vol --nearest --regheader \
-    --mov "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMHBT.mgz \
-    --targ "${mri_dir}"/${hemi}.hippoAmygLabels-T1.v21.FSvoxelSpace.mgz \
-    --o "${mri_dir}"/${hemi}.hippoLabels-T1.v21.MMHBT.FSVoxelSpace.mgz
+    --mov "${mm_dir}"/${hemi}.hippoLabels.MMHBT.mgz \
+    --targ "${mri_dir}"/${hemi}.hippoAmygLabels.FSvoxelSpace.mgz \
+    --o "${mm_dir}"/${hemi}.hippoLabels.MMHBT.FSVoxelSpace.mgz
 
 done
 
 # Make corresponding label file
-cat <<EOF > "${mri_dir}/hippoLabels-T1.v21.MMHBT.csv"
+cat <<EOF > "${mm_dir}/hippoLabels.MMHBT.csv"
 Label,Region
 1,Head-CA
 2,Head-DG
