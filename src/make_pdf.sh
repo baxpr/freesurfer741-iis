@@ -4,7 +4,7 @@
 
 # Source and working dirs
 export src_dir=$(realpath $(dirname $(which ${0})))
-export tmp_dir="${out_dir}"/tmp && mkdir -p "${tmp_dir}"
+export tmp_dir="${out_dir}"/imgtmp && mkdir -p "${tmp_dir}"
 export subj_dir="${SUBJECTS_DIR}"/SUBJECT
 export mri_dir="${subj_dir}"/mri
 export surf_dir="${subj_dir}"/surf
