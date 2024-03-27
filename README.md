@@ -1,5 +1,5 @@
-# Freesurfer recon-all post-processing
+# Freesurfer post-processing
 
-## QA report
+- QA report
 
-## Reformat stats to CSV
+- Reformat stats to CSV (for Freesurfer 7.4.1 with python segmentation modules)
