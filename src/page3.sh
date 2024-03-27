@@ -11,19 +11,13 @@
 
 # Get LGN location: left is 8109, right is 8209
 # /usr/local/freesurfer/FreeSurferColorLUT.txt
-RASL=$(fslstats \
-    "${nii_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.nii.gz \
-    -l 8108.5 -u 8109.5 -c)
-RL=`echo "${RASL}" | awk '{printf "%d",$1}'`
-AL=`echo "${RASL}" | awk '{printf "%d",$2}'`
-SL=`echo "${RASL}" | awk '{printf "%d",$3}'`
+RL=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8109 )
+AL=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8109 )
+SL=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8109 )
 
-RASR=$(fslstats \
-    "${nii_dir}"/ThalamicNuclei.v12.T1.FSvoxelSpace.nii.gz \
-    -l 8208.5 -u 8209.5 -c)
-RR=$(echo "${RASR}" | awk '{printf "%d",$1}')
-AR=$(echo "${RASR}" | awk '{printf "%d",$2}')
-SR=$(echo "${RASR}" | awk '{printf "%d",$3}')
+RR=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8209 )
+AR=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8209 )
+SR=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8209 )
 
 LGNR=$(echo "(${RL} + ${RR}) / 2" | bc)
 LGNA=$(echo "(${AL} + ${AR}) / 2" | bc)
@@ -33,15 +27,13 @@ LGNS=$(echo "(${SL} + ${SR}) / 2" | bc)
 # https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems
 #    10   L thalamus
 #    49   R thalamus
-RASL=$(fslstats "${nii_dir}"/aseg.nii.gz -l 9.5 -u 10.5 -c)
-RL=$(echo "${RASL}" | awk '{printf "%d",$1}')
-AL=$(echo "${RASL}" | awk '{printf "%d",$2}')
-SL=$(echo "${RASL}" | awk '{printf "%d",$3}')
+RL=$(get_com.py "${mri_dir}"/aseg.mgz --axis x --imgval 10 )
+AL=$(get_com.py "${mri_dir}"/aseg.mgz --axis y --imgval 10 )
+SL=$(get_com.py "${mri_dir}"/aseg.mgz --axis z --imgval 10 )
 
-RASR=$(fslstats "${nii_dir}"/aseg.nii.gz -l 48.5 -u 49.5 -c)
-RR=$(echo "${RASR}" | awk '{printf "%d",$1}')
-AR=$(echo "${RASR}" | awk '{printf "%d",$2}')
-SR=$(echo "${RASR}" | awk '{printf "%d",$3}')
+RR=$(get_com.py "${mri_dir}"/aseg.mgz --axis x --imgval 49 )
+AR=$(get_com.py "${mri_dir}"/aseg.mgz --axis y --imgval 49 )
+SR=$(get_com.py "${mri_dir}"/aseg.mgz --axis z --imgval 49 )
 
 THALR=$(echo "(${RL} + ${RR}) / 2" | bc)
 THALA=$(echo "(${AL} + ${AR}) / 2" | bc)
@@ -51,7 +43,7 @@ THALS=$(echo "(${SL} + ${SR}) / 2" | bc)
 # Freeview command line chunks
 V_STR="-viewsize 400 350 --layout 1 --zoom 4"
 T1_STR="-v ${mri_dir}/nu.mgz"
-SEG_STR="-v ${mri_dir}/ThalamicNuclei.v12.T1.FSvoxelSpace.mgz:visible=1:colormap=lut"
+SEG_STR="-v ${mri_dir}/ThalamicNuclei.mgz:visible=1:colormap=lut"
 
 # Coronal slices, A to P
 freeview --viewport coronal ${V_STR} ${T1_STR} \
@@ -144,10 +136,9 @@ montage -mode concatenate \
 convert \
     -size 1224x1584 xc:white \
     -gravity center \( twenty.png -resize 1194x1554 \) -composite \
-    -gravity NorthEast -pointsize 24 -annotate +20+50 "segmentThalamicNuclei.sh" \
+    -gravity NorthEast -pointsize 24 -annotate +20+50 "ThalamicNuclei.mgz" \
     -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
     -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
     -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
     page3.png
-
 

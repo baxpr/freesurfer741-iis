@@ -54,7 +54,6 @@ montage -mode concatenate \
     -trim -border 10 -bordercolor white -resize 600x twelve.png
 
 
-
 # Add info
 # 8.5 x 11 at 144dpi is 1224 x 1584
 # inside 15px border is 1194 x 1554
@@ -63,8 +62,7 @@ convert \
     -gravity center \( twelve.png -resize 1194x1454 \) -geometry +0+0 -composite \
     -gravity NorthEast -pointsize 24 -annotate +20+50 "recon-all" \
     -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
-    -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
+    -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat ${FREESURFER_HOME}/build-stamp.txt)" \
     -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
     page2.png
-
 
