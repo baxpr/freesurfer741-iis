@@ -123,6 +123,7 @@ for roi in rois:
     elif sum(mask)==1:
         vals.append(hippamyg[1].loc[hippamyg[0]==roi].array[0])
     else:
+        print(f'WARNING - no volume found for ROI {roi}')
         vals.append(0)
 
 # Make data frame and write to file
