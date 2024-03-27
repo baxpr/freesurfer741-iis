@@ -5,10 +5,18 @@
 echo Volume computations
 
 # Subcortical regions, aseg
-# This provides our eTIV
-asegstats2table --delimiter comma -m volume \
--s SUBJECT -t "${tmp_dir}"/aseg.csv
 
+# This provides our eTIV
+asegstats2table \
+    --delimiter comma \
+    --meas volume \
+    --subjects SUBJECT \
+    --stats aseg.stats \
+    --tablefile "${tmp_dir}"/aseg.csv
+
+# High resolution pipelines
+asegstats2table --delimiter comma -m volume \
+    -s SUBJECT --statsfile=hipposubfields.lh.T1.v21.stats --tablefile=hipposubfields.lh.T1.v21.dat ...
 
 # Surface parcels
 #    aparc, aparc.pial, aparc.a2009s, aparc.DKTatlas, BA_exvivo
