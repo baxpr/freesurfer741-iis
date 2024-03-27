@@ -11,13 +11,13 @@
 
 # Get LGN location: left is 8109, right is 8209
 # /usr/local/freesurfer/FreeSurferColorLUT.txt
-RL=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8109 )
-AL=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8109 )
-SL=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8109 )
+RL=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8109 )
+AL=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8109 )
+SL=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8109 )
 
-RR=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8209 )
-AR=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8209 )
-SR=$(get_com.py "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8209 )
+RR=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8209 )
+AR=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8209 )
+SR=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8209 )
 
 LGNR=$(echo "(${RL} + ${RR}) / 2" | bc)
 LGNA=$(echo "(${AL} + ${AR}) / 2" | bc)
@@ -27,13 +27,13 @@ LGNS=$(echo "(${SL} + ${SR}) / 2" | bc)
 # https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems
 #    10   L thalamus
 #    49   R thalamus
-RL=$(get_com.py "${mri_dir}"/aseg.mgz --axis x --imgval 10 )
-AL=$(get_com.py "${mri_dir}"/aseg.mgz --axis y --imgval 10 )
-SL=$(get_com.py "${mri_dir}"/aseg.mgz --axis z --imgval 10 )
+RL=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis x --imgval 10 )
+AL=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis y --imgval 10 )
+SL=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis z --imgval 10 )
 
-RR=$(get_com.py "${mri_dir}"/aseg.mgz --axis x --imgval 49 )
-AR=$(get_com.py "${mri_dir}"/aseg.mgz --axis y --imgval 49 )
-SR=$(get_com.py "${mri_dir}"/aseg.mgz --axis z --imgval 49 )
+RR=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis x --imgval 49 )
+AR=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis y --imgval 49 )
+SR=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis z --imgval 49 )
 
 THALR=$(echo "(${RL} + ${RR}) / 2" | bc)
 THALA=$(echo "(${AL} + ${AR}) / 2" | bc)

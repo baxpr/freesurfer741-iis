@@ -27,12 +27,12 @@ data[data==args.imgval] = 1
 com_vox = scipy.ndimage.center_of_mass(data)
 com_world = nibabel.affines.apply_affine(img.affine, com_vox)
 
-if args.axis is 'x':
+if args.axis == 'x':
     print('%d' % com_world[0])
 
-if args.axis is 'y':
+if args.axis == 'y':
     print('%d' % com_world[1])
 
-if args.axis is 'z':
+if args.axis == 'z':
     print('%d' % com_world[2])
 
