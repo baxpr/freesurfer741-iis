@@ -2,15 +2,17 @@
 #
 # Need in path: /usr/local/freesurfer/python/bin
 
+import argparse
 import os
 import pandas
 import string
 
-pandas.options.display.max_rows = 999
+parser = argparse.ArgumentParser()
+parser.add_argument('--subject_dir')
+parser.add_argument('--out_dir')
+args = parser.parse_args()
 
-subject_dir = '/wkdir/INPUTS/SUBJECT'
-mri_dir = f'{subject_dir}/mri'
-out_dir = '.'
+mri_dir = f'{args.subject_dir}/mri'
 
 # Function to sanitize varnames. Alphanumeric or underscore only
 def sanitize(input_string):
@@ -44,8 +46,6 @@ hippamyg = pandas.concat([hipp_lh, hipp_rh, amyg_lh, amyg_rh], axis=0)
 
 # Sanitize varnames
 hippamyg[0] = [sanitize(x) for x in hippamyg[0]]
-
-print(hippamyg)
 
 # Use known list of desired outputs. Fill any missing (and drop any
 # that are unexpected)
@@ -127,5 +127,5 @@ for roi in rois:
 
 # Make data frame and write to file
 haout = pandas.DataFrame([rois, vals])
-haout.to_csv(os.path.join(out_dir,'HAvol.csv'), 
+haout.to_csv(os.path.join(args.out_dir,'HAvol.csv'), 
     header=False, index=False)
