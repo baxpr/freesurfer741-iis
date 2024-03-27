@@ -26,12 +26,12 @@ def sanitize(input_string):
     return output_string
 
 # Load freesurfer volumes data
-area_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc-area.csv'))
-area_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc-area.csv'))
-vol_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc-volume.csv'))
-vol_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc-volume.csv'))
-thk_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc-thickness.csv'))
-thk_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc-thickness.csv'))
+area_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc.DKTatlas-area.csv'))
+area_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc.DKTatlas-area.csv'))
+vol_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc.DKTatlas-volume.csv'))
+vol_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc.DKTatlas-volume.csv'))
+thk_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc.DKTatlas-thickness.csv'))
+thk_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc.DKTatlas-thickness.csv'))
 
 # Drop first columns (subject label)
 area_lh = area_lh.drop(area_lh.columns[0], axis=1)
@@ -66,7 +66,6 @@ aparc = aparc.loc[:,~aparc.columns.duplicated()].copy()
 # Use known list of desired outputs. Fill with 0 any missing (and drop any
 # that are unexpected)
 rois = [
-    'lh_bankssts_area',
     'lh_caudalanteriorcingulate_area',
     'lh_caudalmiddlefrontal_area',
     'lh_cuneus_area',
@@ -96,12 +95,9 @@ rois = [
     'lh_superiorparietal_area',
     'lh_superiortemporal_area',
     'lh_supramarginal_area',
-    'lh_frontalpole_area',
-    'lh_temporalpole_area',
     'lh_transversetemporal_area',
     'lh_insula_area',
     'lh_whitesurfarea_area',
-    'rh_bankssts_area',
     'rh_caudalanteriorcingulate_area',
     'rh_caudalmiddlefrontal_area',
     'rh_cuneus_area',
@@ -131,12 +127,9 @@ rois = [
     'rh_superiorparietal_area',
     'rh_superiortemporal_area',
     'rh_supramarginal_area',
-    'rh_frontalpole_area',
-    'rh_temporalpole_area',
     'rh_transversetemporal_area',
     'rh_insula_area',
     'rh_whitesurfarea_area',
-    'lh_bankssts_volume',
     'lh_caudalanteriorcingulate_volume',
     'lh_caudalmiddlefrontal_volume',
     'lh_cuneus_volume',
@@ -166,11 +159,8 @@ rois = [
     'lh_superiorparietal_volume',
     'lh_superiortemporal_volume',
     'lh_supramarginal_volume',
-    'lh_frontalpole_volume',
-    'lh_temporalpole_volume',
     'lh_transversetemporal_volume',
     'lh_insula_volume',
-    'rh_bankssts_volume',
     'rh_caudalanteriorcingulate_volume',
     'rh_caudalmiddlefrontal_volume',
     'rh_cuneus_volume',
@@ -200,11 +190,8 @@ rois = [
     'rh_superiorparietal_volume',
     'rh_superiortemporal_volume',
     'rh_supramarginal_volume',
-    'rh_frontalpole_volume',
-    'rh_temporalpole_volume',
     'rh_transversetemporal_volume',
     'rh_insula_volume',
-    'lh_bankssts_thickness',
     'lh_caudalanteriorcingulate_thickness',
     'lh_caudalmiddlefrontal_thickness',
     'lh_cuneus_thickness',
@@ -234,12 +221,9 @@ rois = [
     'lh_superiorparietal_thickness',
     'lh_superiortemporal_thickness',
     'lh_supramarginal_thickness',
-    'lh_frontalpole_thickness',
-    'lh_temporalpole_thickness',
     'lh_transversetemporal_thickness',
     'lh_insula_thickness',
     'lh_meanthickness_thickness',
-    'rh_bankssts_thickness',
     'rh_caudalanteriorcingulate_thickness',
     'rh_caudalmiddlefrontal_thickness',
     'rh_cuneus_thickness',
@@ -269,8 +253,6 @@ rois = [
     'rh_superiorparietal_thickness',
     'rh_superiortemporal_thickness',
     'rh_supramarginal_thickness',
-    'rh_frontalpole_thickness',
-    'rh_temporalpole_thickness',
     'rh_transversetemporal_thickness',
     'rh_insula_thickness',
     'rh_meanthickness_thickness',
@@ -288,7 +270,8 @@ for roi in rois:
     else:
         vals.append(aparc[roi].array[0])
 
+
 # Make data frame and write to file
 aparcout = pandas.DataFrame([rois, vals])
-aparcout.to_csv(os.path.join(args.out_dir,'aparc.csv'), 
+aparcout.to_csv(os.path.join(args.out_dir,'DKTatlas.csv'), 
     header=False, index=False)

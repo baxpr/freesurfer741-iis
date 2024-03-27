@@ -26,12 +26,12 @@ def sanitize(input_string):
     return output_string
 
 # Load freesurfer volumes data
-area_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc-area.csv'))
-area_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc-area.csv'))
-vol_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc-volume.csv'))
-vol_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc-volume.csv'))
-thk_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc-thickness.csv'))
-thk_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc-thickness.csv'))
+area_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc.pial-area.csv'))
+area_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc.pial-area.csv'))
+vol_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc.pial-volume.csv'))
+vol_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc.pial-volume.csv'))
+thk_lh = pandas.read_csv(os.path.join(args.csv_dir,'lh-aparc.pial-thickness.csv'))
+thk_rh = pandas.read_csv(os.path.join(args.csv_dir,'rh-aparc.pial-thickness.csv'))
 
 # Drop first columns (subject label)
 area_lh = area_lh.drop(area_lh.columns[0], axis=1)
@@ -100,7 +100,6 @@ rois = [
     'lh_temporalpole_area',
     'lh_transversetemporal_area',
     'lh_insula_area',
-    'lh_whitesurfarea_area',
     'rh_bankssts_area',
     'rh_caudalanteriorcingulate_area',
     'rh_caudalmiddlefrontal_area',
@@ -135,7 +134,6 @@ rois = [
     'rh_temporalpole_area',
     'rh_transversetemporal_area',
     'rh_insula_area',
-    'rh_whitesurfarea_area',
     'lh_bankssts_volume',
     'lh_caudalanteriorcingulate_volume',
     'lh_caudalmiddlefrontal_volume',
@@ -288,7 +286,8 @@ for roi in rois:
     else:
         vals.append(aparc[roi].array[0])
 
+
 # Make data frame and write to file
 aparcout = pandas.DataFrame([rois, vals])
-aparcout.to_csv(os.path.join(args.out_dir,'aparc.csv'), 
+aparcout.to_csv(os.path.join(args.out_dir,'pial.csv'), 
     header=False, index=False)

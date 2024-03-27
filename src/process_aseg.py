@@ -107,15 +107,14 @@ rois = [
     ]
 vals = list()
 for roi in rois:
-    mask = [x==roi for x in rois]
-    if sum(mask)>1:
-        raise Exception(f'Found >1 value for {roi}')
-    elif sum(mask)==1:
-        #vals.append(aseg[1].loc[aseg[0]==roi].array[0])
-        vals.append(aseg[roi].array[0])
-    else:
+    mask = [x==roi for x in aparc.columns]
+    if sum(mask)==0:
         print(f'WARNING - no volume found for ROI {roi}')
         vals.append(0)
+    elif sum(mask)>1:
+        raise Exception(f'Found >1 value for {roi}')
+    else:
+        vals.append(aparc[roi].array[0])
 
 # Make data frame and write to file
 asegout = pandas.DataFrame([rois, vals])
