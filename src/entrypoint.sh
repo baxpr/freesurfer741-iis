@@ -33,8 +33,8 @@ stats2tables2outputs.sh
 # Images for MM relabeling
 create_MM_labelmaps.sh
 
+# Convert some images to Nifti for convenience
+nii_convert.sh
 
-#make_outputs.sh
-
-
+# Make PDFs
 
