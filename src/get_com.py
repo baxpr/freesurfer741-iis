@@ -1,4 +1,4 @@
-#!/usr/local/fsl6/fslpython/envs/fslpython/bin/python
+#!/usr/bin/env python3
 # 
 # Get center of mass of cortex ROI, in voxel index
 
