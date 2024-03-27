@@ -11,7 +11,7 @@ import sys
 parser = argparse.ArgumentParser()
 parser.add_argument('--axis', required=True)
 parser.add_argument('--roi_niigz', required=True)
-parser.add_argument('--imgval', required=True)
+parser.add_argument('--imgval', type=int, required=True)
 args = parser.parse_args()
 
 img = nibabel.load(args.roi_niigz)
