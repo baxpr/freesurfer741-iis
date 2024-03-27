@@ -16,6 +16,9 @@ export the_date=$(date)
 page1.sh
 page2.sh
 page3.sh
+
+exit 0
+
 page4.sh
 convert \
   "${tmp_dir}"/page1.png \
