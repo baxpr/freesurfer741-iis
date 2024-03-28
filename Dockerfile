@@ -6,7 +6,7 @@ RUN yum -y update && \
     yum -y install epel-release && \
     yum -y install ImageMagick && \
     yum -y install xorg-x11-server-Xvfb xorg-x11-xauth && \
-    yum -y install mesa-libGLU fontconfig libtiff mesa-dri-drivers-23.1.0 && \
+    yum -y install mesa-libGLU fontconfig libtiff mesa-dri-drivers && \
     yum clean all
 
 # And add our own code for custom post-processing and QC
