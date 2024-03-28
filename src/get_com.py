@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # 
-# Get center of mass of cortex ROI, in voxel index
+# Get center of mass of cortex ROI, in voxel index. Need to use nifti
+# images for transforms to be correct
 
 import argparse
 import nibabel
@@ -16,15 +17,13 @@ args = parser.parse_args()
 
 img = nibabel.load(args.roi_niigz)
 data = img.get_fdata()
-
-# numpy can't handle nan voxels, so fix 'em
-data[numpy.isnan(data)] = 0
+roi = numpy.zeros(data.shape)
 
 # COM unweighted
-data[data==args.imgval] = 1
+roi[data==args.imgval] = 1
 
 # Get COM
-com_vox = scipy.ndimage.center_of_mass(data)
+com_vox = scipy.ndimage.center_of_mass(roi)
 com_world = nibabel.affines.apply_affine(img.affine, com_vox)
 
 if args.axis == 'x':

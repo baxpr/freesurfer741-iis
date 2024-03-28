@@ -9,15 +9,23 @@
 #
 # Include a plain T1 next to e.g. the axial thalamus for comparison.
 
+#img_nu="${nii_dir}"/nu.nii.gz
+#img_thal="${nii_dir}"/ThalamicNuclei.nii.gz
+#img_aseg="${nii_dir}"/aparc+aseg.nii.gz
+
+img_nu="${mri_dir}"/nu.mgz
+img_thal="${mri_dir}"/ThalamicNuclei.mgz
+img_aseg="${mri_dir}"/aseg.mgz
+
 # Get LGN location: left is 8109, right is 8209
 # /usr/local/freesurfer/FreeSurferColorLUT.txt
-RL=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8109 )
-AL=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8109 )
-SL=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8109 )
+RL=$(get_com.py --roi_niigz "${img_thal}" --axis x --imgval 8109 )
+AL=$(get_com.py --roi_niigz "${img_thal}" --axis y --imgval 8109 )
+SL=$(get_com.py --roi_niigz "${img_thal}" --axis z --imgval 8109 )
 
-RR=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis x --imgval 8209 )
-AR=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis y --imgval 8209 )
-SR=$(get_com.py --roi_niigz "${mri_dir}"/ThalamicNuclei.mgz --axis z --imgval 8209 )
+RR=$(get_com.py --roi_niigz "${img_thal}" --axis x --imgval 8209 )
+AR=$(get_com.py --roi_niigz "${img_thal}" --axis y --imgval 8209 )
+SR=$(get_com.py --roi_niigz "${img_thal}" --axis z --imgval 8209 )
 
 LGNR=$(echo "(${RL} + ${RR}) / 2" | bc)
 LGNA=$(echo "(${AL} + ${AR}) / 2" | bc)
@@ -27,13 +35,13 @@ LGNS=$(echo "(${SL} + ${SR}) / 2" | bc)
 # https://surfer.nmr.mgh.harvard.edu/fswiki/CoordinateSystems
 #    10   L thalamus
 #    49   R thalamus
-RL=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis x --imgval 10 )
-AL=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis y --imgval 10 )
-SL=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis z --imgval 10 )
+RL=$(get_com.py --roi_niigz "${img_aseg}" --axis x --imgval 10 )
+AL=$(get_com.py --roi_niigz "${img_aseg}" --axis y --imgval 10 )
+SL=$(get_com.py --roi_niigz "${img_aseg}" --axis z --imgval 10 )
 
-RR=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis x --imgval 49 )
-AR=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis y --imgval 49 )
-SR=$(get_com.py --roi_niigz "${mri_dir}"/aseg.mgz --axis z --imgval 49 )
+RR=$(get_com.py --roi_niigz "${img_aseg}" --axis x --imgval 49 )
+AR=$(get_com.py --roi_niigz "${img_aseg}" --axis y --imgval 49 )
+SR=$(get_com.py --roi_niigz "${img_aseg}" --axis z --imgval 49 )
 
 THALR=$(echo "(${RL} + ${RR}) / 2" | bc)
 THALA=$(echo "(${AL} + ${AR}) / 2" | bc)
@@ -42,8 +50,8 @@ THALS=$(echo "(${SL} + ${SR}) / 2" | bc)
 
 # Freeview command line chunks
 V_STR="-viewsize 400 350 --layout 1 --zoom 4"
-T1_STR="-v ${mri_dir}/nu.mgz"
-SEG_STR="-v ${mri_dir}/ThalamicNuclei.mgz:visible=1:colormap=lut"
+T1_STR="-v ${img_nu}"
+SEG_STR="-v ${img_thal}:visible=1:colormap=lut"
 
 # Coronal slices, A to P
 freeview --viewport coronal ${V_STR} ${T1_STR} \
@@ -136,7 +144,7 @@ montage -mode concatenate \
 convert \
     -size 1224x1584 xc:white \
     -gravity center \( twenty.png -resize 1194x1554 \) -composite \
-    -gravity NorthEast -pointsize 24 -annotate +20+50 "ThalamicNuclei.mgz" \
+    -gravity NorthEast -pointsize 24 -annotate +20+50 "ThalamicNuclei" \
     -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
     -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
     -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \

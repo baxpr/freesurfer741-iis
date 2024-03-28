@@ -7,7 +7,9 @@ export src_dir=$(realpath $(dirname $(which ${0})))
 export tmp_dir="${out_dir}"/imgtmp && mkdir -p "${tmp_dir}"
 export subj_dir="${SUBJECTS_DIR}"/SUBJECT
 export mri_dir="${subj_dir}"/mri
+export nii_dir="${out_dir}"/NIFTIS
 export surf_dir="${subj_dir}"/surf
+export XDG_RUNTIME_DIR="${tmp_dir}"/runtime-root
 
 mkdir -p "${out_dir}"/PDF
 
