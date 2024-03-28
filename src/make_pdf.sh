@@ -16,9 +16,6 @@ export the_date=$(date)
 page1.sh
 page2.sh
 page3.sh
-
-exit 0
-
 page4.sh
 convert \
   "${tmp_dir}"/page1.png \
@@ -26,6 +23,8 @@ convert \
   "${tmp_dir}"/page3.png \
   "${tmp_dir}"/page4.png \
   "${out_dir}"/PDF/Freesurfer-QA.pdf
+
+exit 0
 
 # Detailed PDF
 make_slice_screenshots.sh
