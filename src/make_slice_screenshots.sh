@@ -2,14 +2,17 @@
 
 echo Slice screenshots
 
-cd "${tmp_dir}"
-
 # Create the aseg without wm or cerebral gm
-mri_binarize --i "${mri_dir}"/aseg.mgz --o aseg.sub.mgz \
+mri_binarize --i "${mri_dir}"/aseg.mgz --o "${tmp_dir}"aseg.sub.mgz \
 --replace 2  0 --replace 3 0 --replace 41 0 --replace 42 0
 
 # 3D screenshots
+cd "${subj_dir}"
 freeview -cmd "${src_dir}"/freeview_batch_3d.txt
+mv lh*.png rh*.png "${tmp_dir}"
+
+# Remaining processing in tmp dir
+cd "${tmp_dir}"
 
 # Get brain mask extents
 extents=( $(compute_extents.py "${mri_dir}"/brainmask.mgz) )
