@@ -9,7 +9,7 @@ Additional system packages are added to support freeview and imagemagick
 
 Some custom postprocessing code -
 
-- Reformats stats outputs to a more friendly CSV
+- Reformats and combines stats outputs to a simpler CSV format
 
 - Adds additional relabelings of the hippocampal subfield segmentation, following
     McHugo M, Talati P, Woodward ND, Armstrong K, Blackford JU, Heckers S. 
