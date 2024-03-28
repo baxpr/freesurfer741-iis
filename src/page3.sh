@@ -9,10 +9,6 @@
 #
 # Include a plain T1 next to e.g. the axial thalamus for comparison.
 
-#img_nu="${nii_dir}"/nu.nii.gz
-#img_thal="${nii_dir}"/ThalamicNuclei.nii.gz
-#img_aseg="${nii_dir}"/aparc+aseg.nii.gz
-
 img_nu="${mri_dir}"/nu.mgz
 img_thal="${mri_dir}"/ThalamicNuclei.mgz
 img_aseg="${mri_dir}"/aseg.mgz
