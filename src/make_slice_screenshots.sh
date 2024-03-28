@@ -2,9 +2,11 @@
 
 echo Slice screenshots
 
-# Create the aseg without wm or cerebral gm
+# Create the aseg without wm or cerebral gm or ventricles
 mri_binarize --i "${mri_dir}"/aseg.mgz --o "${tmp_dir}"/aseg.sub.mgz \
---replace 2  0 --replace 3 0 --replace 41 0 --replace 42 0
+    --replace   2 0  --replace   3 0  --replace  41 0  --replace  42 0 \
+    --replace 251 0  --replace 252 0  --replace 253 0  --replace 254 0  --replace 255 0 \
+    --replace   4 0  --replace  43 0
 
 # 3D screenshots
 cd "${subj_dir}"
