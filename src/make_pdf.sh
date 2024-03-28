@@ -26,10 +26,5 @@ convert \
   "${tmp_dir}"/page4.png \
   "${out_dir}"/PDF/Freesurfer-QA.pdf
 
-exit 0
-
 # Detailed PDF
 make_slice_screenshots.sh
-
-# Clean up
-rm -fr "${subj_dir}"/trash

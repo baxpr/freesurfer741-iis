@@ -20,7 +20,10 @@ data = img.get_fdata()
 roi = numpy.zeros(data.shape)
 
 # COM unweighted
-roi[data==args.imgval] = 1
+if args.imgval<0:
+    roi[data>0] = 1
+else:
+    roi[data==args.imgval] = 1
 
 # Get COM
 com_vox = scipy.ndimage.center_of_mass(roi)

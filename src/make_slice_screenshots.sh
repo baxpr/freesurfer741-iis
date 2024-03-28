@@ -12,7 +12,7 @@ mri_binarize --i "${mri_dir}"/aseg.mgz --o aseg.sub.mgz \
 freeview -cmd "${src_dir}"/freeview_batch_3d.txt
 
 # Get brain mask extents
-extents=( $(compute_extents.py "${nii_dir}"/brainmask.nii.gz) )
+extents=( $(compute_extents.py "${mri_dir}"/brainmask.mgz) )
 #extents=(${extents// / })
 xmin=$((${extents[0]} + 4))
 xmax=$((${extents[1]} - 4))
@@ -22,11 +22,9 @@ zmin=$((${extents[4]} + 4))
 zmax=$((${extents[5]} - 4))
 
 # And center of mass
-com=( $(fslstats "${nii_dir}"/brainmask.nii.gz -c) )
-#com=(${com// / })
-comx=$(printf "%.0f" ${com[0]})
-comy=$(printf "%.0f" ${com[1]})
-comz=$(printf "%.0f" ${com[2]})
+comx=$(get_com.py --roi_niigz "${mri_dir}"/brainmask.mgz --axis x --imgval -1 )
+comy=$(get_com.py --roi_niigz "${mri_dir}"/brainmask.mgz --axis y --imgval -1 )
+comz=$(get_com.py --roi_niigz "${mri_dir}"/brainmask.mgz --axis z --imgval -1 )
 
 # Slice by slice (4mm gap). Even numbered image files are with no overlay, 
 # odd with, so we get correct sorting later
@@ -72,7 +70,7 @@ for i in ?_mont_???.png; do
         -size 1224x1584 xc:white \
         -gravity Center \( ${i} -resize 1194x1454 -geometry +0+0 \) -composite \
         -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
-        -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
+        -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat ${FREESURFER_HOME}/build-stamp.txt)" \
         -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
         ${i}
 done
@@ -94,7 +92,7 @@ convert \
     -gravity North \( first_page.png -resize 1194x1194 -geometry +0+100 \) -composite \
     -gravity NorthEast -pointsize 24 -annotate +20+50 "QA Summary - recon-all" \
     -gravity SouthEast -pointsize 24 -annotate +20+20 "${the_date}" \
-    -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat $FREESURFER_HOME/build-stamp.txt)" \
+    -gravity SouthWest -pointsize 24 -annotate +20+20 "$(cat ${FREESURFER_HOME}/build-stamp.txt)" \
     -gravity NorthWest -pointsize 24 -annotate +20+50 "${label_info}" \
     first_page.png
 
