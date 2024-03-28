@@ -7,7 +7,7 @@ Developed using manifest digest sha256:10b6468cbd9fcd2db3708f4651d59ad75d4da849a
 Additional system packages are added to support freeview and imagemagick 
 (see the Dockerfile).
 
-Some custom postprocessing code
+Some custom postprocessing code -
 
 - Reformats stats outputs to a more friendly CSV
 
