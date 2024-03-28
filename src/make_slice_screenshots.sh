@@ -106,4 +106,6 @@ convert \
     -page letter \
     Freesurfer-QA-detailed.pdf
 
+mkdir -p "${out_dir}"/PDF_DETAIL
 cp Freesurfer-QA-detailed.pdf "${out_dir}"/PDF_DETAIL
+
