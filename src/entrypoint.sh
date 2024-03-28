@@ -15,7 +15,7 @@ while [[ $# -gt 0 ]]
 do
   key="$1"
   case $key in
-    --SUBJECTS_DIR)
+    --subjects_dir)
         export SUBJECTS_DIR="$2"; shift; shift;;
     --label_info)
         export label_info="$2"; shift; shift;;
