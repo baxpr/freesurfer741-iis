@@ -5,10 +5,7 @@
 # Defaults
 export SUBJECTS_DIR=/OUTPUTS
 export out_dir=/OUTPUTS
-export label_info="No label"
-
-# Path for python3
-export PATH=/usr/local/freesurfer/python/bin:$PATH
+export label_info="Unlabeled scan"
 
 # Parse inputs
 while [[ $# -gt 0 ]]
@@ -28,6 +25,7 @@ done
 
 # Show what we got
 echo SUBJECTS_DIR = "${SUBJECTS_DIR}"
+echo label_info   = "${label_info}"
 echo out_dir      = "${out_dir}"
 
 # Convert FS text stats output to dax-friendly CSV. 
@@ -41,5 +39,5 @@ create_MM_labelmaps.sh
 nii_convert.sh
 
 # Make screenshots and PDFs
-make_pdf.sh
+xwrapper.sh make_pdf.sh
 

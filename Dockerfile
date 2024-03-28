@@ -17,4 +17,4 @@ COPY src /opt/fs-extensions/src
 ENV PATH /opt/fs-extensions/src:${FREESURFER_HOME}/python/bin:${PATH}
 
 # Entrypoint
-ENTRYPOINT ["xwrapper.sh","entrypoint.sh"]
+ENTRYPOINT ["run-everything.sh"]
