@@ -57,7 +57,7 @@ process_thalamus_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/V
 
 # sclimbic outputs (FS sclimbic run has created these csvs already)
 process_sclimbic.py --sclimbic_csv "${SUBJECTS_DIR}"/sclimbic_volumes_all.csv --out_dir "${out_dir}"/VOLSTATS
-process_sclimbic.py --sclimbic_csvdir "${SUBJECTS_DIR}"--out_dir "${out_dir}"/SCLIMBIC_QA
+process_sclimbic_qa.py --sclimbic_csvdir "${SUBJECTS_DIR}"--out_dir "${out_dir}"/SCLIMBIC_QA
 
 # Extra computations for MM relabeling of hippocampus subfields
 compute_MM_volumes.py --stats_dir "${out_dir}"/VOLSTATS

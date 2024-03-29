@@ -27,8 +27,8 @@ def sanitize(input_string):
     return output_string
 
 # Load freesurfer volumes data
-zqa = pandas.read_csv(os.path.join(args.sclimbic_csvdir,'sclimbic_zqa_scores_all.csv')
-confs = pandas.read_csv(os.path.join(args.sclimbic_csvdir,'sclimbic_confidences_all.csv')
+zqa = pandas.read_csv(os.path.join(args.sclimbic_csvdir,'sclimbic_zqa_scores_all.csv'))
+confs = pandas.read_csv(os.path.join(args.sclimbic_csvdir,'sclimbic_confidences_all.csv'))
 
 # Drop first column (subject label)
 zqa = zqa.drop(zqa.columns[0], axis=1)
