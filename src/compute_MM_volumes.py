@@ -18,10 +18,11 @@ print(f'Running {__file__}')
 pandas.set_option('display.max_rows', None)
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--havol_csv', required=True)
 parser.add_argument('--stats_dir', required=True)
 args = parser.parse_args()
 
-vols = pandas.read_csv(os.path.join(args.stats_dir,'HAvol.csv'))
+vols = pandas.read_csv(args.havol_csv)
 
 mmregions = list()
 mmvols = list()
