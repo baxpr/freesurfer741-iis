@@ -97,5 +97,6 @@ for hemi in ['lh', 'rh']:
     
         
 mmdata = pandas.DataFrame([mmregions,mmvols])
+os.makedirs(args.stats_dir, exist_ok=True)
 mmdata.to_csv(os.path.join(args.stats_dir,'MMhippvol.csv'),
     index=False, header=False)
