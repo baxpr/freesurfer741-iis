@@ -56,5 +56,6 @@ for roi in rois:
 
 # Make data frame and write to file
 bsout = pandas.DataFrame([rois, vals])
+os.makedirs(args.out_dir, exist_ok=True)
 bsout.to_csv(os.path.join(args.out_dir,'BSvol.csv'), 
     header=False, index=False)

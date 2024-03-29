@@ -103,5 +103,6 @@ for roi in rois:
 
 # Make data frame and write to file
 thalout = pandas.DataFrame([rois, vals])
+os.makedirs(args.out_dir, exist_ok=True)
 thalout.to_csv(os.path.join(args.out_dir,'TNvol.csv'), 
     header=False, index=False)

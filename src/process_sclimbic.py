@@ -70,5 +70,6 @@ for roi in rois:
 
 # Make data frame and write to file
 sclimbicout = pandas.DataFrame([rois, vals])
+os.makedirs(args.out_dir, exist_ok=True)
 sclimbicout.to_csv(os.path.join(args.out_dir,'sclimbic.csv'), 
     header=False, index=False)

@@ -10,7 +10,7 @@ import string
 print(f'Running {__file__}')
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--aseg_csv', required=True)
+parser.add_argument('--wmparc_csv', required=True)
 parser.add_argument('--out_dir', required=True)
 args = parser.parse_args()
 
@@ -24,24 +24,22 @@ def sanitize(input_string):
             output_string += i.lower()
         else:
             output_string += '_'
-    output_string = output_string.replace('3rd_ventricle', 'x3rd_ventricle')
-    output_string = output_string.replace('4th_ventricle', 'x4th_ventricle')
-    output_string = output_string.replace('5th_ventricle', 'x5th_ventricle')
     return output_string
 
 # Load freesurfer volumes data
-aseg = pandas.read_csv(args.aseg_csv)
+wmparc = pandas.read_csv(args.wmparc_csv)
 
 # Drop first column (subject label)
-aseg = aseg.drop(aseg.columns[0], axis=1)
+wmparc = wmparc.drop(wmparc.columns[0], axis=1)
 
 #print(aseg)
 
 # Sanitize varnames
-aseg.columns = [sanitize(x) for x in aseg.columns]
+wmparc.columns = [sanitize(x) for x in wmparc.columns]
 
-#for x in aseg.columns:
-#    print(f"    '{x}',")
+for x in wmparc.columns:
+    print(f"    '{x}',")
+sys.exit(0)
 
 # Use known list of desired outputs. Fill with 0 any missing (and drop any
 # that are unexpected)

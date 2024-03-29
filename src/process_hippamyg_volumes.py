@@ -130,5 +130,6 @@ for roi in rois:
 
 # Make data frame and write to file
 haout = pandas.DataFrame([rois, vals])
+os.makedirs(args.out_dir, exist_ok=True)
 haout.to_csv(os.path.join(args.out_dir,'HAvol.csv'), 
     header=False, index=False)

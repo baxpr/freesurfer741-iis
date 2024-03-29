@@ -292,5 +292,6 @@ for roi in rois:
 
 # Make data frame and write to file
 aparcout = pandas.DataFrame([rois, vals])
+os.makedirs(args.out_dir, exist_ok=True)
 aparcout.to_csv(os.path.join(args.out_dir,'aparc.csv'), 
     header=False, index=False)
