@@ -122,17 +122,17 @@ rois = [
     ]
 vals = list()
 for roi in rois:
-    mask = [x==roi for x in aseg.columns]
+    mask = [x==roi for x in wmparc.columns]
     if sum(mask)==0:
         print(f'  WARNING - no volume found for ROI {roi}')
         vals.append(0)
     elif sum(mask)>1:
         raise Exception(f'Found >1 value for {roi}')
     else:
-        vals.append(aseg[roi].array[0])
+        vals.append(wmparc[roi].array[0])
 
 # Make data frame and write to file
-asegout = pandas.DataFrame([rois, vals])
+wmparcout = pandas.DataFrame([rois, vals])
 os.makedirs(args.out_dir, exist_ok=True)
-asegout.to_csv(os.path.join(args.out_dir,'aseg.csv'), 
+wmparcout.to_csv(os.path.join(args.out_dir,'wmparc.csv'), 
     header=False, index=False)
