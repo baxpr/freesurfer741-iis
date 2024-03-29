@@ -35,7 +35,7 @@ recon-all -all -i /INPUTS/t1.nii.gz -s SUBJECT -hires
 segment_subregions thalamus --cross SUBJECT
 segment_subregions hippo-amygdala --cross SUBJECT
 segment_subregions brainstem --cross SUBJECT
-mri_sclimbic_seg -s SUBJECT --conform write_qa_stats
+mri_sclimbic_seg -s SUBJECT --conform --write_qa_stats
 
 # Post processing
 postproc-entrypoint.sh \

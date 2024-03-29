@@ -20,6 +20,14 @@ asegstats2table \
     --stats aseg.stats \
     --tablefile "${tmp_dir}"/aseg.csv
 
+# sclimbic volumes
+asegstats2table \
+    --delimiter comma \
+    --meas volume \
+    --subjects SUBJECT \
+    --stats sclimbic.stats \
+    --tablefile "${tmp_dir}"/sclimbic.csv
+
 # Surface parcellations
 #    aparc, aparc.pial, aparc.a2009s, aparc.DKTatlas, BA_exvivo
 #    lh, rh
@@ -50,13 +58,14 @@ process_DKTatlas.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_DKT
 process_a2009s.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_a2009s
 process_aparc.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_aparc
 process_pial.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_pial
+process_wmparc.py --wmparc_csv "${tmp_dir}"/wmparc.csv --out_dir "${out_dir}"/VOLSTATS
 
 process_brainstem_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS
 process_hippamyg_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS
 process_thalamus_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS
 
 # sclimbic outputs (FS sclimbic run has created these csvs already)
-process_sclimbic.py --sclimbic_csv "${SUBJECTS_DIR}"/sclimbic_volumes_all.csv --out_dir "${out_dir}"/VOLSTATS
+process_sclimbic.py --sclimbic_csv "${tmp_dir}"/sclimbic.csv --out_dir "${out_dir}"/VOLSTATS
 process_sclimbic_qa.py --sclimbic_csvdir "${SUBJECTS_DIR}"--out_dir "${out_dir}"/SCLIMBIC_QA
 
 # Extra computations for MM relabeling of hippocampus subfields
