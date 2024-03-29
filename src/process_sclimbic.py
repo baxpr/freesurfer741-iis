@@ -37,78 +37,25 @@ sclimbic = sclimbic.drop(sclimbic.columns[0], axis=1)
 # Sanitize varnames
 sclimbic.columns = [sanitize(x) for x in sclimbic.columns]
 
-for x in sclimbic.columns:
-    print(f"    '{x}',")
-
-sys.exit(0)
+#for x in sclimbic.columns:
+#    print(f"    '{x}',")
+#sys.exit(0)
 
 # Use known list of desired outputs. Fill with 0 any missing (and drop any
 # that are unexpected)
 rois = [
-    'left_lateral_ventricle',
-    'left_inf_lat_vent',
-    'left_cerebellum_white_matter',
-    'left_cerebellum_cortex',
-    'left_thalamus',
-    'left_caudate',
-    'left_putamen',
-    'left_pallidum',
-    'x3rd_ventricle',
-    'x4th_ventricle',
-    'brain_stem',
-    'left_hippocampus',
-    'left_amygdala',
-    'csf',
-    'left_accumbens_area',
-    'left_ventraldc',
-    'left_vessel',
-    'left_choroid_plexus',
-    'right_lateral_ventricle',
-    'right_inf_lat_vent',
-    'right_cerebellum_white_matter',
-    'right_cerebellum_cortex',
-    'right_thalamus',
-    'right_caudate',
-    'right_putamen',
-    'right_pallidum',
-    'right_hippocampus',
-    'right_amygdala',
-    'right_accumbens_area',
-    'right_ventraldc',
-    'right_vessel',
-    'right_choroid_plexus',
-    'x5th_ventricle',
-    'wm_hypointensities',
-    'left_wm_hypointensities',
-    'right_wm_hypointensities',
-    'non_wm_hypointensities',
-    'left_non_wm_hypointensities',
-    'right_non_wm_hypointensities',
-    'optic_chiasm',
-    'cc_posterior',
-    'cc_mid_posterior',
-    'cc_central',
-    'cc_mid_anterior',
-    'cc_anterior',
-    'brainsegvol',
-    'brainsegvolnotvent',
-    'lhcortexvol',
-    'rhcortexvol',
-    'cortexvol',
-    'lhcerebralwhitemattervol',
-    'rhcerebralwhitemattervol',
-    'cerebralwhitemattervol',
-    'subcortgrayvol',
-    'totalgrayvol',
-    'supratentorialvol',
-    'supratentorialvolnotvent',
-    'maskvol',
-    'brainsegvol_to_etiv',
-    'maskvol_to_etiv',
-    'lhsurfaceholes',
-    'rhsurfaceholes',
-    'surfaceholes',
-    'estimatedtotalintracranialvol',
+    'left_nucleus_accumbens',
+    'right_nucleus_accumbens',
+    'left_hypothal_nomb',
+    'right_hypothal_nomb',
+    'left_fornix',
+    'right_fornix',
+    'left_mammillarybody',
+    'right_mammillarybody',
+    'left_basal_forebrain',
+    'right_basal_forebrain',
+    'left_septalnuc',
+    'right_septalnuc',
     ]
 vals = list()
 for roi in rois:
