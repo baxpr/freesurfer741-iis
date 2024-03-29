@@ -69,5 +69,5 @@ process_sclimbic.py --sclimbic_csv "${tmp_dir}"/sclimbic.csv --out_dir "${out_di
 process_sclimbic_qa.py --sclimbic_csvdir "${SUBJECTS_DIR}" --out_dir "${out_dir}"/SCLIMBIC_QA
 
 # Extra computations for MM relabeling of hippocampus subfields
-compute_MM_volumes.py --stats_dir "${out_dir}"/VOLSTATS_MMhippamyg
+compute_MM_volumes.py --stats_dir "${out_dir}"/VOLSTATS_hippamyg
 
