@@ -30,12 +30,12 @@ echo t1_niigz     = "${t1_niigz}"
 echo label_info   = "${label_info}"
 echo out_dir      = "${out_dir}"
 
-# Main freesurfer pipeline
+# Main freesurfer pipelines
 recon-all -all -i /INPUTS/t1.nii.gz -s SUBJECT -hires
 segment_subregions thalamus --cross SUBJECT
 segment_subregions hippo-amygdala --cross SUBJECT
 segment_subregions brainstem --cross SUBJECT
-mri_sclimbic_seg -s SUBJECT --conform
+mri_sclimbic_seg -s SUBJECT --conform write_qa_stats
 
 # Post processing
 postproc-entrypoint.sh \
