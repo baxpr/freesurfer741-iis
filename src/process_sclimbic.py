@@ -59,16 +59,16 @@ rois = [
     ]
 vals = list()
 for roi in rois:
-    mask = [x==roi for x in aseg.columns]
+    mask = [x==roi for x in sclimbic.columns]
     if sum(mask)==0:
         print(f'  WARNING - no volume found for ROI {roi}')
         vals.append(0)
     elif sum(mask)>1:
         raise Exception(f'Found >1 value for {roi}')
     else:
-        vals.append(aseg[roi].array[0])
+        vals.append(sclimbic[roi].array[0])
 
 # Make data frame and write to file
-asegout = pandas.DataFrame([rois, vals])
-asegout.to_csv(os.path.join(args.out_dir,'aseg.csv'), 
+sclimbicout = pandas.DataFrame([rois, vals])
+sclimbicout.to_csv(os.path.join(args.out_dir,'sclimbic.csv'), 
     header=False, index=False)
