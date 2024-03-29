@@ -14,7 +14,7 @@
 echo MM label maps
 
 mri_dir="${SUBJECTS_DIR}"/SUBJECT/mri
-mm_dir="${out_dir}"/MMmaps
+mm_dir="${out_dir}"/MMhippomaps
 mkdir -p "${mm_dir}"
 
 ##############################################################################
