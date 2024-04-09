@@ -51,23 +51,24 @@ asegstats2table \
     --tablefile "${tmp_dir}"/wmparc.csv
 
 # Convert FS CSVs to dax-friendly CSVs
-process_aseg.py --aseg_csv "${tmp_dir}"/aseg.csv --out_dir "${out_dir}"/ASEGSTATS
-
 process_BA_exvivo.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_BA_exvivo
 process_DKTatlas.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_DKTatlas
 process_a2009s.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_a2009s
 process_aparc.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_aparc
 process_pial.py --csv_dir "${tmp_dir}" --out_dir "${out_dir}"/APARCSTATS_pial
-process_wmparc.py --wmparc_csv "${tmp_dir}"/wmparc.csv --out_dir "${out_dir}"/WMPARCSTATS
 
-process_brainstem_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS_brainstem
-process_hippamyg_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS_hippamyg
-process_thalamus_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS_thalamus
+process_aseg.py --aseg_csv "${tmp_dir}"/aseg.csv --out_dir "${out_dir}"/VOLSTATS_std
+process_wmparc.py --wmparc_csv "${tmp_dir}"/wmparc.csv --out_dir "${out_dir}"/VOLSTATS_std
+
+process_brainstem_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS_highres
+process_hippamyg_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS_highres
+process_thalamus_volumes.py --subject_dir "${subj_dir}" --out_dir "${out_dir}"/VOLSTATS_highres
 
 # sclimbic outputs (FS sclimbic run has created these csvs already)
-process_sclimbic.py --sclimbic_csv "${tmp_dir}"/sclimbic.csv --out_dir "${out_dir}"/VOLSTATS_sclimbic
+process_sclimbic.py --sclimbic_csv "${tmp_dir}"/sclimbic.csv --out_dir "${out_dir}"/VOLSTATS_highres
 process_sclimbic_qa.py --sclimbic_csvdir "${SUBJECTS_DIR}" --out_dir "${out_dir}"/SCLIMBIC_QA
 
 # Extra computations for MM relabeling of hippocampus subfields
-compute_MM_volumes.py --havol_csv "${out_dir}"/VOLSTATS_hippamyg/HAvol.csv --stats_dir "${out_dir}"/VOLSTATS_MMhippamyg
+compute_MM_volumes.py --havol_csv "${out_dir}"/VOLSTATS_highres/HAvol.csv \
+    --stats_dir "${out_dir}"/VOLSTATS_highres
 

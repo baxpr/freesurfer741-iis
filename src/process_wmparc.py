@@ -32,8 +32,6 @@ wmparc = pandas.read_csv(args.wmparc_csv)
 # Drop first column (subject label)
 wmparc = wmparc.drop(wmparc.columns[0], axis=1)
 
-#print(aseg)
-
 # Sanitize varnames
 wmparc.columns = [sanitize(x) for x in wmparc.columns]
 
