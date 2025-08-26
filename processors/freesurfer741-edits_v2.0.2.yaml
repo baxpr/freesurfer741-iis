@@ -50,23 +50,29 @@ outputs:
   - {path: VOLSTATS_highres, type: DIR, resource: VOLSTATS_highres}
   - {path: SCLIMBIC_QA, type: DIR, resource: SCLIMBIC_QA}
 
-pre:
+
+command:
   type: singularity_exec
   container: freesurfer
   extraopts: --bind /data/mcr/centos7/FS6/license.txt:/usr/local/freesurfer/.license
   args: ->
     bash -c \"
+
       mv /INPUTS/SUBJECT/SUBJECT /OUTPUTS/SUBJECT &&
+      echo "Edited files provided:" &&
+      ls -l /INPUTS/EDITS/EDITS &&
       mv /INPUTS/EDITS/EDITS/* /OUTPUTS/SUBJECT/mri &&
-      FIXME WE ARE HERE
+
+      export SUBJECTS_DIR=/OUTPUTS &&
+      recon-all -all -s SUBJECT -hires &&
+      segment_subregions thalamus --cross SUBJECT &&
+      segment_subregions hippo-amygdala --cross SUBJECT &&
+      segment_subregions brainstem --cross SUBJECT &&
+      mri_sclimbic_seg -s SUBJECT --conform --write_qa_stats &&
+
+      postproc-entrypoint.sh
+        --subjects_dir \$SUBJECTS_DIR
+        --label_info "{project} {session} {scan}"
+        --out_dir /OUTPUTS
+    
     \"
-  
-command: 
-  type: singularity_run
-  container: freesurfer
-  extraopts: --bind /data/mcr/centos7/FS6/license.txt:/usr/local/freesurfer/.license
-  args: >-
-    --t1_niigz /INPUTS/t1.nii.gz
-    --subjects_dir /OUTPUTS
-    --label_info "{project} {session} {scan}"
-    --out_dir /OUTPUTS
