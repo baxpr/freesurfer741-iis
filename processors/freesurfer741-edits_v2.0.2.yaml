@@ -59,7 +59,7 @@ command:
   type: singularity_exec
   container: freesurfer
   extraopts: --bind /data/mcr/centos7/FS6/license.txt:/usr/local/freesurfer/.license
-  args: ->
+  args: >-
     bash -c '
 
       mv /INPUTS/SUBJECT/SUBJECT /OUTPUTS/SUBJECT &&
