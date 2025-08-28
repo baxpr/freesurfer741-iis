@@ -75,7 +75,7 @@ command:
       mri_sclimbic_seg -s SUBJECT --conform --write_qa_stats &&
 
       postproc-entrypoint.sh
-        --subjects_dir $SUBJECTS_DIR
+        --subjects_dir \$SUBJECTS_DIR
         --label_info "{project} {session} {scan}"
         --out_dir /OUTPUTS
     
